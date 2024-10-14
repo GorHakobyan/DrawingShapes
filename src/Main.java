@@ -1,22 +1,14 @@
-import Shapes.Shape;
 import Factories.ShapeFactory;
-
-import java.util.ArrayList;
-import java.util.List;
+import Shapes.Shape;
 
 public class Main {
-    public static void main(String[] args) {
-        List<Shape> shapes = new ArrayList<>() {
-            {
-                add(ShapeFactory.createShape(Shape.Type.CIRCLE));
-                add(ShapeFactory.createShape(Shape.Type.RECTANGLE));
-                add(ShapeFactory.createShape(Shape.Type.TRIANGLE));
-            }
-        };
 
-        for(var shape : shapes)
-        {
-            System.out.println(shape.getClass());
-        }
+    public static void main(String[] args) {
+        final int WIDTH = 500;
+        final int HEIGHT = 500;
+        final String NAME = "Drawing Shapes";
+        var mainWindow = new WindowManager(WIDTH, HEIGHT, NAME);
+
+        mainWindow.addShape(ShapeFactory.createShape(Shape.Type.RECTANGLE));
     }
 }
