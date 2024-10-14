@@ -1,6 +1,9 @@
 import Factories.ShapeFactory;
 import Shapes.Shape;
 import javax.swing.*;
+import java.awt.event.ActionListener;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class WindowManager {
 
@@ -9,6 +12,12 @@ public class WindowManager {
     private final String m_name;
     private Shape m_currentShape;
     private final JFrame m_window;
+
+    private final Map<String, ActionListener> buttonNameActionMap = new LinkedHashMap<>() {{
+        put("Create Rectangle",_ ->addShape(ShapeFactory.createShape(Shape.Type.RECTANGLE)));
+        put("Create Circle",_ ->addShape(ShapeFactory.createShape(Shape.Type.CIRCLE)));
+        put("Create Triangle",_ ->addShape(ShapeFactory.createShape(Shape.Type.TRIANGLE)));
+    }};
 
     public WindowManager(int width, int height, String name) {
         m_width = width;
@@ -35,11 +44,11 @@ public class WindowManager {
         m_window.setSize(m_width, m_height);
         m_window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         m_window.setTitle(m_name);
+        m_window.setVisible(true);
 
-        var createRectangleBtn = ButtonFactory.createButton("Create Rectangle", _ -> addShape(ShapeFactory.createShape(Shape.Type.RECTANGLE)));
-        var createCircleButton = ButtonFactory.createButton("Create Circle", _ -> addShape(ShapeFactory.createShape(Shape.Type.CIRCLE)));
-
-        m_window.add(createRectangleBtn);
-        m_window.add(createCircleButton);
+        for(var entry : buttonNameActionMap.entrySet()) {
+            var button = ButtonFactory.createButton(entry.getKey(), entry.getValue());
+            m_window.add(button);
+        }
     }
 }

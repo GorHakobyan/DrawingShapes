@@ -5,6 +5,7 @@ import java.awt.*;
 public class Triangle extends Shape {
     @Override
     public void  paintComponent(Graphics g)    {
-        System.out.println(getName() + " is under construction");
+        Graphics2D g2 = (Graphics2D) g;
+        g2.drawPolygon(new int[] {325, 200, 450}, new int[] {0, 250, 250}, 3);
     }
 }
