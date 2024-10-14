@@ -1,3 +1,4 @@
+import Factories.ShapeFactory;
 import Shapes.Shape;
 import javax.swing.*;
 
@@ -34,5 +35,11 @@ public class WindowManager {
         m_window.setSize(m_width, m_height);
         m_window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         m_window.setTitle(m_name);
+
+        var createRectangleBtn = ButtonFactory.createButton("Create Rectangle", _ -> addShape(ShapeFactory.createShape(Shape.Type.RECTANGLE)));
+        var createCircleButton = ButtonFactory.createButton("Create Circle", _ -> addShape(ShapeFactory.createShape(Shape.Type.CIRCLE)));
+
+        m_window.add(createRectangleBtn);
+        m_window.add(createCircleButton);
     }
 }
